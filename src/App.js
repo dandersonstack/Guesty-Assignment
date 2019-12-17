@@ -1,26 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Package1 from './complex-package';
+import DependencyTree from "./components/dependency-tree";
+import ResolvedDependencies from "./components/resolved-dependencies";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const data = JSON.parse(JSON.stringify(Package1));
+
+
+
+export default class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {showResolved: false};
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+        this.setState(state => ({
+            showResolved: !state.showResolved
+        }));
+    }
+
+    render() {
+        const libraryTree = this.state.showResolved ? <ResolvedDependencies dependencies={data.dependencies}/> :
+            <DependencyTree name={"Dependency Tree"} version={"0.0.1"} dependencies={data.dependencies}/>;
+        const buttonTitle =  this.state.showResolved ? "Show Regular Tree" : "Show Resolved Tree"
+        return (
+            <div className="App">
+                <button onClick={this.handleClick}>
+                    {buttonTitle}
+                </button>
+                {libraryTree}
+            </div>
+        );
+    }
 }
-
-export default App;
