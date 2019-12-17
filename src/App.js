@@ -22,7 +22,7 @@ export default class App extends React.Component {
     }
 
     render() {
-        const libraryTree = this.state.showResolved ? <ResolvedDependencies dependencies={data.dependencies}/> :
+        const taskResults = this.state.showResolved ? <ResolvedDependencies dependencies={data.dependencies}/> :
             <DependencyTree name={"Dependency Tree"} version={"0.0.1"} dependencies={data.dependencies}/>;
         const buttonTitle =  this.state.showResolved ? "Show Regular Tree" : "Show Resolved Tree"
         return (
@@ -30,7 +30,7 @@ export default class App extends React.Component {
                 <button onClick={this.handleClick}>
                     {buttonTitle}
                 </button>
-                {libraryTree}
+                {taskResults}
             </div>
         );
     }

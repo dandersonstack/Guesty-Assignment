@@ -1,7 +1,12 @@
 import React from 'react';
 import LeafNode from "./leaf-node";
 
-export default class DependencyTree extends React.Component {
+
+class DependencyTree extends React.Component {
+
+    //TODO: Extract Heavy Resolve Function away from the Render method
+    //Option 1: https://medium.com/@rossbulat/how-to-memoize-in-react-3d20cbcd2b6e
+    //Option 2: https://medium.com/@sdolidze/react-hooks-memoization-99a9a91c8853
     render() {
         const dependencies = this.props.dependencies;
         let nestedTree = [];
@@ -29,4 +34,4 @@ export default class DependencyTree extends React.Component {
         );
     }
 }
-
+export default DependencyTree;
